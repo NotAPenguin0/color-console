@@ -8,7 +8,10 @@
 #include <string>
 #include <type_traits>
 #include <utility>
+
+#ifdef _WIN32
 #include <windows.h>
+#endif
 
 namespace hue
 {
@@ -100,9 +103,13 @@ namespace hue
 
     int get()
     {
+#ifdef _WIN32
         CONSOLE_SCREEN_BUFFER_INFO i;
         return GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &i) ?
                i.wAttributes : BAD_COLOR;
+#else
+        return BAD_COLOR;
+#endif
     }
 
     int get_text()
@@ -118,7 +125,9 @@ namespace hue
     void set(int c)
     {
         if (is_good(c))
+#if _WIN32
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
+#endif
     }
 
     void set(int a, int b)
