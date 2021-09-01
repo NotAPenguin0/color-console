@@ -9,7 +9,7 @@
 #include <type_traits>
 #include <utility>
 
-#ifdef _WIN32
+#if _WIN32
 #include <windows.h>
 #endif
 
@@ -103,7 +103,7 @@ namespace hue
 
     int get()
     {
-#ifdef _WIN32
+#if _WIN32
         CONSOLE_SCREEN_BUFFER_INFO i;
         return GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &i) ?
                i.wAttributes : BAD_COLOR;
