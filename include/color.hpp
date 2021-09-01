@@ -124,8 +124,8 @@ namespace hue
 
     void set(int c)
     {
-        if (is_good(c))
 #if _WIN32
+        if (is_good(c))
             SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), c);
 #endif
     }
